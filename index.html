@@ -3,151 +3,816 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Janya Goel's Portfolio</title>
+  <title>Janya Goel - Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+    
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #8b5cf6;
+      --accent: #ec4899;
+      --bg-light: #ffffff;
+      --bg-gray: #f8fafc;
+      --text-primary: #0f172a;
+      --text-secondary: #64748b;
+      --border: #e2e8f0;
+      --shadow: rgba(0, 0, 0, 0.1);
+    }
+    
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f0f4f8;
-      color: #1a1a1a;
-      transition: all 0.4s ease;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-gray);
+      color: var(--text-primary);
+      line-height: 1.6;
+      transition: background 0.3s ease;
     }
-    header {
-      padding: 60px 20px 40px;
-      background: linear-gradient(to right, #0077b6, #00b4d8);
-      color: white;
-      text-align: center;
+    
+    /* Navbar */
+    .navbar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 1px 3px var(--shadow);
+      z-index: 100;
+      transition: all 0.3s ease;
     }
-    header h1 {
-      font-size: 3.5rem;
-      margin-bottom: 10px;
+    
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    header h2 {
-      font-weight: 400;
+    
+    .logo {
       font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
-    .toggle-btn {
-      margin-top: 20px;
-      padding: 10px 18px;
-      font-size: 1rem;
-      background-color: white;
-      color: #0077b6;
-      border: none;
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+    
+    .nav-links a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+      font-size: 0.95rem;
+    }
+    
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+    
+    .theme-toggle {
+      background: var(--bg-gray);
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.75rem;
       border-radius: 8px;
       cursor: pointer;
-      transition: 0.3s ease-in-out;
+      font-size: 1.2rem;
+      transition: all 0.3s;
     }
-    .toggle-btn:hover {
-      background-color: #caf0f8;
+    
+    .theme-toggle:hover {
+      background: var(--primary);
+      border-color: var(--primary);
     }
-    .projects {
+    
+    /* Hero Section */
+    .hero {
+      min-height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 30px;
-      padding: 50px 20px;
+      justify-content: center;
+      padding: 8rem 2rem 4rem;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      position: relative;
+      overflow: hidden;
     }
-    .project-card {
-      background-color: white;
-      width: 90%;
-      max-width: 700px;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      transition: transform 0.3s, box-shadow 0.3s;
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+      opacity: 0.3;
+    }
+    
+    .hero-content {
+      max-width: 900px;
       text-align: center;
+      color: white;
+      z-index: 1;
     }
-    .project-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    
+    .hero-content h1 {
+      font-size: 4rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      animation: fadeInUp 0.8s ease;
     }
-    .project-card h2 {
-      color: #0077b6;
-      font-size: 2rem;
+    
+    .hero-content .tagline {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      opacity: 0.95;
+      font-weight: 300;
+      animation: fadeInUp 0.8s ease 0.2s backwards;
     }
-    .project-card p {
-      margin-top: 10px;
-      font-size: 1rem;
-      color: #444;
-    }
-    .nav-links {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-    .nav-links a {
-      color: #0077b6;
-      margin: 0 15px;
-      font-weight: bold;
+    
+    .hero-content .subtitle {
       font-size: 1.1rem;
+      opacity: 0.85;
+      margin-bottom: 2.5rem;
+      animation: fadeInUp 0.8s ease 0.4s backwards;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      animation: fadeInUp 0.8s ease 0.6s backwards;
+    }
+    
+    .btn {
+      padding: 0.875rem 2rem;
+      border-radius: 8px;
       text-decoration: none;
-      transition: color 0.3s;
+      font-weight: 600;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
     }
-    .nav-links a:hover {
-      color: #0096c7;
+    
+    .btn-primary {
+      background: white;
+      color: var(--primary);
     }
+    
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+    
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+    
+    .btn-secondary:hover {
+      background: white;
+      color: var(--primary);
+    }
+    
+    /* Projects Section */
+    .projects-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .section-header p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+    }
+    
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+    
+    .project-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px var(--shadow);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      border: 1px solid var(--border);
+    }
+    
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+    
+    .project-header {
+      padding: 2rem;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      position: relative;
+    }
+    
+    .project-icon {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    
+    .project-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    
+    .project-card .project-type {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+    
+    .project-body {
+      padding: 2rem;
+    }
+    
+    .project-body p {
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.7;
+    }
+    
+    .tech-stack-preview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    .tech-badge-small {
+      background: var(--bg-gray);
+      color: var(--primary);
+      padding: 0.35rem 0.75rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.7);
+      animation: fadeIn 0.3s;
+      backdrop-filter: blur(5px);
+    }
+    
+    .modal-content {
+      background-color: white;
+      margin: 3% auto;
+      padding: 0;
+      border-radius: 16px;
+      max-width: 900px;
+      width: 90%;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      overflow: hidden;
+    }
+    
+    .modal-header {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 3rem;
+      position: relative;
+    }
+    
+    .close {
+      position: absolute;
+      right: 2rem;
+      top: 2rem;
+      color: white;
+      font-size: 2rem;
+      font-weight: 300;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: all 0.3s;
+    }
+    
+    .close:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: rotate(90deg);
+    }
+    
+    .modal-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .modal-subtitle {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    .modal-body {
+      padding: 3rem;
+    }
+    
+    .detail-section {
+      margin-bottom: 2.5rem;
+    }
+    
+    .detail-section h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+    
+    .tech-badge {
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    
+    .role-badge {
+      background: var(--bg-gray);
+      color: var(--primary);
+      padding: 0.5rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
+      display: inline-block;
+      border: 2px solid var(--primary);
+    }
+    
+    .description ul {
+      list-style: none;
+      margin-top: 1rem;
+    }
+    
+    .description li {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+      position: relative;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+    
+    .description li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--primary);
+      font-weight: bold;
+    }
+    
+    .modal-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: white;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      padding: 0.875rem 1.75rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s;
+    }
+    
+    .modal-link:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+    }
+    
+    .contact-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.5rem;
+      background: var(--bg-gray);
+      border-radius: 8px;
+      text-decoration: none;
+      color: var(--text-primary);
+      transition: all 0.3s;
+      border: 2px solid var(--border);
+    }
+    
+    .contact-link:hover {
+      border-color: var(--primary);
+      transform: translateX(5px);
+      box-shadow: 0 4px 12px var(--shadow);
+    }
+    
+    .contact-info {
+      font-weight: 500;
+      color: var(--primary);
+    }
+    
+    /* Footer */
+    footer {
+      background: var(--text-primary);
+      color: white;
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+    
+    footer p {
+      opacity: 0.8;
+    }
+    
     /* Dark Mode */
     .dark-mode {
-      background-color: #121212;
-      color: #e0e0e0;
+      --bg-light: #0f172a;
+      --bg-gray: #1e293b;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --border: #334155;
+      --shadow: rgba(0, 0, 0, 0.3);
     }
-    .dark-mode header {
-      background: linear-gradient(to right, #03045e, #023e8a);
+    
+    .dark-mode .navbar {
+      background: rgba(15, 23, 42, 0.9);
     }
-    .dark-mode .project-card {
-      background-color: #1e1e1e;
-      color: white;
+    
+    .dark-mode .theme-toggle {
+      background: var(--bg-gray);
     }
-    .dark-mode .project-card h2 {
-      color: #90e0ef;
+    
+    .dark-mode .project-card,
+    .dark-mode .modal-content {
+      background: var(--bg-light);
     }
-    .dark-mode .nav-links a {
-      color: #90e0ef;
+    
+    .dark-mode .modal-body {
+      background: var(--bg-light);
     }
-    .dark-mode .toggle-btn {
-      background-color: #90e0ef;
-      color: #03045e;
+    
+    .dark-mode .tech-badge-small {
+      background: var(--bg-gray);
     }
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2.2rem;
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
       }
-      .project-card h2 {
-        font-size: 1.5rem;
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes slideUp {
+      from {
+        transform: translateY(100px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      
+      .hero-content .tagline {
+        font-size: 1.2rem;
+      }
+      
+      .cta-buttons {
+        flex-direction: column;
+      }
+      
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .nav-links {
+        gap: 1rem;
+      }
+      
+      .nav-links a {
+        font-size: 0.85rem;
+      }
+      
+      .modal-content {
+        margin: 5% auto;
+      }
+      
+      .modal-header,
+      .modal-body {
+        padding: 2rem;
+      }
+      
+      .modal-title {
+        font-size: 1.8rem;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Janya Goel</h1>
-    <h2>A Passionate Learner & Tech Explorer 🚀</h2>
-    <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
-  </header>
-  <section class="projects">
-    <div class="project-card">
-      <a href="./public/movie-ranking.html"><h2>🎬 Movie Ranking Project</h2></a>
-      <p>A list of my favorite Indian films with a neat layout and ratings.</p>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">JG</div>
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#" onclick="event.preventDefault(); openContactModal();">About</a>
+        <a href="#" onclick="event.preventDefault(); openContactModal();">Contact</a>
+        <button class="theme-toggle" onclick="toggleDarkMode()">🌙</button>
+      </div>
     </div>
-    <div class="project-card">
-      <a href="https://ieeensut.com/" target="_blank"><h2>🌐 IEEENSUT Alumni Reflection</h2></a>
-      <p>
-        I worked on the <b>IEEENSUT website</b> and contributed to the <b>Alumni Reflection</b> section.<br>
-        <span style="font-size:0.95em;color:#0077b6;">(Visit <b>ieeensut.com</b> to see more!)</span>
-      </p>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>Janya Goel</h1>
+      <p class="tagline">Full Stack Developer & Tech Enthusiast</p>
+      <p class="subtitle">Building beautiful, functional web experiences with modern technologies</p>
+      <div class="cta-buttons">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <button class="btn btn-secondary" onclick="openContactModal()">Get In Touch</button>
+      </div>
     </div>
   </section>
-  <div class="nav-links">
-    <a href="./public/about.html">About Me</a> |
-    <a href="./public/contact.html">Contact Me</a>
+
+  <!-- Projects Section -->
+  <section class="projects-section" id="projects">
+    <div class="section-header">
+      <h2>Featured Projects</h2>
+      <p>A showcase of my recent work and contributions</p>
+    </div>
+    
+    <div class="projects-grid">
+      <!-- Movie Ranking Project -->
+      <div class="project-card">
+        <div class="project-header">
+          <span class="project-icon">🎬</span>
+          <h3>Movie Ranking Project</h3>
+          <p class="project-type">Personal Project</p>
+        </div>
+        <div class="project-body">
+          <p>A curated collection of my favorite Indian films with elegant layout design and personal ratings system.</p>
+          <div class="tech-stack-preview">
+            <span class="tech-badge-small">HTML</span>
+            <span class="tech-badge-small">CSS</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- IEEE Project -->
+      <div class="project-card" onclick="window.open('https://ieeensut.com/', '_blank')">
+        <div class="project-header">
+          <span class="project-icon">🌐</span>
+          <h3>IEEENSUT Alumni</h3>
+          <p class="project-type">Organizational Website</p>
+        </div>
+        <div class="project-body">
+          <p>Contributed to the IEEENSUT website, specifically developing the Alumni Reflection section to showcase student achievements.</p>
+          <div class="tech-stack-preview">
+            <span class="tech-badge-small">HTML</span>
+            <span class="tech-badge-small">CSS</span>
+            <span class="tech-badge-small">JavaScript</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- AURA Project -->
+      <div class="project-card" onclick="openModal()">
+        <div class="project-header">
+          <span class="project-icon">✨</span>
+          <h3>AURA Conference</h3>
+          <p class="project-type">Conference Website</p>
+        </div>
+        <div class="project-body">
+          <p>Responsive web interface for NSUT conference with focus on clean design, accessibility, and user experience.</p>
+          <div class="tech-stack-preview">
+            <span class="tech-badge-small">React</span>
+            <span class="tech-badge-small">Node.js</span>
+            <span class="tech-badge-small">CSS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div id="projectModal" class="modal" onclick="closeModalOnOutsideClick(event)">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <div class="modal-title">✨ AURA Conference Website</div>
+        <div class="modal-subtitle">Full Stack Development Project</div>
+      </div>
+      
+      <div class="modal-body">
+        <div class="detail-section">
+          <h3>🛠️ Tech Stack</h3>
+          <div class="tech-stack">
+            <span class="tech-badge">HTML</span>
+            <span class="tech-badge">CSS</span>
+            <span class="tech-badge">React.js</span>
+            <span class="tech-badge">Node.js</span>
+          </div>
+        </div>
+        
+        <div class="detail-section">
+          <h3>👨‍💻 Role</h3>
+          <span class="role-badge">Frontend Developer</span>
+        </div>
+        
+        <div class="detail-section description">
+          <h3>📋 Project Overview</h3>
+          <ul>
+            <li>Built a responsive web interface for a conference organised at NSUT</li>
+            <li>Collaborated with a team to design and implement features</li>
+            <li>Focused on clean UI and accessibility</li>
+          </ul>
+        </div>
+        
+        <div class="detail-section">
+          <h3>🔗 Links</h3>
+          <a href="https://github.com/Janya-Goel/AURA-Website" target="_blank" class="modal-link">
+            <span>View on GitHub</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="modal" onclick="closeContactModalOnOutsideClick(event)">
+    <div class="modal-content">
+      <div class="modal-header" style="background: linear-gradient(135deg, #ec4899, #8b5cf6);">
+        <span class="close" onclick="closeContactModal()">&times;</span>
+        <div class="modal-title">📬 Contact Information</div>
+        <div class="modal-subtitle">Let's connect and collaborate</div>
+      </div>
+      
+      <div class="modal-body">
+        <div class="detail-section">
+          <h3>📱 Phone</h3>
+          <a href="tel:9818489986" class="contact-link">
+            <span class="contact-info">9818489986</span>
+          </a>
+        </div>
+        
+        <div class="detail-section">
+          <h3>📧 Email</h3>
+          <a href="mailto:janyagoel.14@gmail.com" class="contact-link">
+            <span class="contact-info">janyagoel.14@gmail.com</span>
+          </a>
+        </div>
+        
+        <div class="detail-section">
+          <h3>💼 LinkedIn</h3>
+          <a href="https://linkedin.com/in/janyagoel" target="_blank" class="contact-link">
+            <span class="contact-info">linkedin.com/in/janyagoel</span>
+            <span>→</span>
+          </a>
+        </div>
+        
+        <div class="detail-section">
+          <h3>💻 GitHub</h3>
+          <a href="https://github.com/Janya-Goel" target="_blank" class="contact-link">
+            <span class="contact-info">github.com/Janya-Goel</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Janya Goel. All rights reserved.</p>
+  </footer>
+
   <script>
+    let darkMode = false;
+    
     function toggleDarkMode() {
+      darkMode = !darkMode;
       document.body.classList.toggle("dark-mode");
+      const toggle = document.querySelector('.theme-toggle');
+      toggle.textContent = darkMode ? '☀️' : '🌙';
     }
+
+    function openModal() {
+      document.getElementById("projectModal").style.display = "block";
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+      document.getElementById("projectModal").style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+
+    function closeModalOnOutsideClick(event) {
+      if (event.target.id === "projectModal") {
+        closeModal();
+      }
+    }
+
+    function openContactModal() {
+      document.getElementById("contactModal").style.display = "block";
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeContactModal() {
+      document.getElementById("contactModal").style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+
+    function closeContactModalOnOutsideClick(event) {
+      if (event.target.id === "contactModal") {
+        closeContactModal();
+      }
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeModal();
+        closeContactModal();
+      }
+    });
+
+    // Smooth scrolling
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
   </script>
 </body>
 </html>
