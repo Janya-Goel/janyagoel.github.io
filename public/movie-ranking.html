@@ -3,52 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top 3 Indian Movies</title>
+    <title>Top 3 Indian Movies - Janya Goel</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --bg-light: #ffffff;
+            --bg-gray: #f8fafc;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #1a1a1a;
-            color: white;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-gray);
+            color: var(--text-primary);
             min-height: 100vh;
             transition: background 0.3s, color 0.3s;
         }
+        
         .header {
-            background: linear-gradient(135deg, #9c88ff, #b19cd9);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             text-align: center;
-            padding: 60px 20px;
-            margin-bottom: 40px;
+            padding: 80px 20px 60px;
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
         }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse"><path d="M 100 0 L 0 0 0 100" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
         .header h1 {
-            font-size: 3rem;
-            font-weight: 300;
-            margin-bottom: 20px;
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
             color: white;
+            animation: fadeInUp 0.8s ease;
         }
+        
         .header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+            font-size: 1.3rem;
+            opacity: 0.95;
             margin-bottom: 30px;
-        }
-        .toggle-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 2px solid rgba(255, 255, 255, 0.3);
             color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
+            font-weight: 300;
+            animation: fadeInUp 0.8s ease 0.2s backwards;
+        }
+        
+        .toggle-btn {
+            background: white;
+            border: none;
+            color: var(--primary);
+            padding: 12px 28px;
+            border-radius: 8px;
             font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            animation: fadeInUp 0.8s ease 0.4s backwards;
         }
+        
         .toggle-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         main {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 20px 60px;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         /* -------------- HORIZONTAL MOVIE SCROLL -------------- */
@@ -59,172 +122,294 @@
             overflow-x: auto;
             margin-bottom: 50px;
             padding-bottom: 30px;
+            scroll-behavior: smooth;
         }
+        
         .movie-list::-webkit-scrollbar {
-            height: 10px;
+            height: 12px;
         }
+        
+        .movie-list::-webkit-scrollbar-track {
+            background: var(--bg-gray);
+            border-radius: 10px;
+        }
+        
         .movie-list::-webkit-scrollbar-thumb {
-            background: #444;
-            border-radius: 6px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
         }
+        
+        .movie-list::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+        
         .movie-list a {
             text-decoration: none;
             color: inherit;
             flex: 0 0 auto;
         }
+        
         .movie-card {
-            background: #2d2d2d;
-            border-radius: 15px;
-            padding: 40px 30px;
-            text-align: center;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
             width: 370px;
             min-width: 320px;
             max-width: 370px;
-            transition: all 0.3s ease;
-            border: 1px solid #3d3d3d;
-            margin-bottom: 0;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border);
+            box-shadow: 0 4px 6px var(--shadow);
         }
+        
         .movie-card:hover {
-            transform: translateY(-5px) scale(1.04);
-            background: #353535;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
         }
+        
+        .movie-header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 40px 30px;
+            text-align: center;
+        }
+        
+        .movie-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+        
         .movie-card h2 {
-            color: #9c88ff;
-            font-size: 2rem;
-            margin-bottom: 30px;
-            font-weight: 400;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin: 0;
         }
+        
+        .movie-body {
+            padding: 30px;
+        }
+        
         .cast-info {
-            color: #ccc;
-            font-size: 1.1rem;
-            line-height: 2;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 2.2;
         }
+        
         .cast-info div {
             margin-bottom: 8px;
+            display: flex;
+            align-items: center;
         }
+        
         .cast-icon {
-            margin-right: 8px;
-            opacity: 0.7;
+            margin-right: 12px;
+            font-size: 1.2rem;
         }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+        
+        .tech-badge {
+            background: var(--bg-gray);
+            color: var(--primary);
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
         .links {
             text-align: center;
             margin-top: 40px;
             padding: 40px 0;
         }
-        .links a {
-            display: inline-block;
-            padding: 15px 30px;
-            background: rgba(156, 136, 255, 0.2);
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             text-decoration: none;
-            border-radius: 25px;
-            font-weight: 500;
-            font-size: 1.1rem;
-            border: 2px solid rgba(156, 136, 255, 0.3);
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.05rem;
             transition: all 0.3s ease;
         }
-        .links a:hover {
-            background: rgba(156, 136, 255, 0.3);
+        
+        .back-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(156, 136, 255, 0.2);
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
         }
-        /* -------------- LIGHT THEME CLASSES -------------- */
-        body.light-theme {
-            background: #f4f4f4;
-            color: #111;
+
+        /* -------------- DARK THEME -------------- */
+        .dark-mode {
+            --bg-light: #0f172a;
+            --bg-gray: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border: #334155;
+            --shadow: rgba(0, 0, 0, 0.3);
         }
-        body.light-theme .header {
-            background: linear-gradient(135deg, #ede7f6, #f8bbd0);
-            color: #444;
+        
+        .dark-mode .header {
+            background: linear-gradient(135deg, #03045e, #023e8a);
         }
-        body.light-theme .header h1 {
-            color: #6c47cb;
+        
+        .dark-mode .movie-card {
+            background: var(--bg-light);
         }
-        body.light-theme .movie-card {
-            background: #fff;
-            color: #333;
-            border: 1px solid #ddd;
+        
+        .dark-mode .tech-badge {
+            background: var(--bg-gray);
         }
-        body.light-theme .movie-card h2 {
-            color: #6c47cb;
+        
+        .dark-mode .toggle-btn {
+            background: rgba(144, 224, 239, 0.2);
+            color: #90e0ef;
         }
-        body.light-theme .links a {
-            background: rgba(156, 136, 255, 0.09);
-            color: #6c47cb;
-            border-color: rgba(156, 136, 255, 0.18);
+        
+        .dark-mode .movie-list::-webkit-scrollbar-track {
+            background: var(--bg-light);
         }
-        body.light-theme .toggle-btn {
-            color: #6c47cb;
-            border: 2px solid rgba(156, 136, 255, 0.18);
-            background: rgba(156, 136, 255, 0.13);
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-        body.light-theme .toggle-btn:hover {
-            background: rgba(156, 136, 255, 0.19);
-        }
+        
         @media (max-width: 900px) {
-            .movie-card { width: 90vw; min-width: 270px; max-width: 320px; }
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .movie-card { 
+                width: 90vw; 
+                min-width: 280px; 
+                max-width: 350px; 
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>Top 3 Indian Movies</h1>
-        <p>A mini project by Janya</p>
-        <button class="toggle-btn" id="toggleThemeBtn">Toggle Theme</button>
+        <div class="header-content">
+            <h1>🎬 Top Indian Movies</h1>
+            <p>Curated collection by Janya Goel</p>
+            <button class="toggle-btn" id="toggleThemeBtn">Toggle Dark Mode</button>
+        </div>
     </div>
+    
     <main>
+        <div class="section-header">
+            <h2>Featured Films</h2>
+        </div>
+        
         <section class="movie-list">
             <a href="https://en.wikipedia.org/wiki/Raazi" target="_blank">
                 <div class="movie-card">
-                    <h2>Raazi</h2>
-                    <div class="cast-info">
-                        <div><span class="cast-icon">🎬</span>Alia Bhatt</div>
-                        <div><span class="cast-icon">🎬</span>Vicky Kaushal</div>
+                    <div class="movie-header">
+                        <span class="movie-icon">🎭</span>
+                        <h2>Raazi</h2>
+                    </div>
+                    <div class="movie-body">
+                        <div class="cast-info">
+                            <div><span class="cast-icon">⭐</span>Alia Bhatt</div>
+                            <div><span class="cast-icon">⭐</span>Vicky Kaushal</div>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Drama</span>
+                            <span class="tech-badge">Thriller</span>
+                        </div>
                     </div>
                 </div>
             </a>
+            
             <a href="https://en.wikipedia.org/wiki/Uri:_The_Surgical_Strike" target="_blank">
                 <div class="movie-card">
-                    <h2>Uri</h2>
-                    <div class="cast-info">
-                        <div><span class="cast-icon">🎬</span>Vicky Kaushal</div>
-                        <div><span class="cast-icon">🎬</span>Yami Gautam</div>
+                    <div class="movie-header">
+                        <span class="movie-icon">🎖️</span>
+                        <h2>Uri</h2>
+                    </div>
+                    <div class="movie-body">
+                        <div class="cast-info">
+                            <div><span class="cast-icon">⭐</span>Vicky Kaushal</div>
+                            <div><span class="cast-icon">⭐</span>Yami Gautam</div>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Action</span>
+                            <span class="tech-badge">Military</span>
+                        </div>
                     </div>
                 </div>
             </a>
+            
             <a href="https://en.wikipedia.org/wiki/Student_of_the_Year" target="_blank">
                 <div class="movie-card">
-                    <h2>Student of the Year (SOTY)</h2>
-                    <div class="cast-info">
-                        <div><span class="cast-icon">🎬</span>Alia Bhatt</div>
-                        <div><span class="cast-icon">🎬</span>Varun Dhawan</div>
-                        <div><span class="cast-icon">🎬</span>Siddharth Malhotra</div>
+                    <div class="movie-header">
+                        <span class="movie-icon">🎓</span>
+                        <h2>Student of the Year</h2>
+                    </div>
+                    <div class="movie-body">
+                        <div class="cast-info">
+                            <div><span class="cast-icon">⭐</span>Alia Bhatt</div>
+                            <div><span class="cast-icon">⭐</span>Varun Dhawan</div>
+                            <div><span class="cast-icon">⭐</span>Sidharth Malhotra</div>
+                        </div>
+                        <div class="tech-stack">
+                            <span class="tech-badge">Drama</span>
+                            <span class="tech-badge">Romance</span>
+                        </div>
                     </div>
                 </div>
             </a>
         </section>
+        
         <div class="links">
-            <a href="./../index.html">← Back to Portfolio</a>
+            <a href="../index.html" class="back-btn">
+                <span>← Back to Portfolio</span>
+            </a>
         </div>
     </main>
+    
     <script>
         // Theme toggle logic
         const toggleBtn = document.getElementById('toggleThemeBtn');
+        let darkMode = false;
+        
         function toggleTheme() {
-            document.body.classList.toggle('light-theme');
-            localStorage.setItem(
-                'theme', 
-                document.body.classList.contains('light-theme') ? 'light' : 'dark'
-            );
+            darkMode = !darkMode;
+            document.body.classList.toggle('dark-mode');
+            toggleBtn.textContent = darkMode ? 'Toggle Light Mode' : 'Toggle Dark Mode';
+            localStorage.setItem('theme', darkMode ? 'dark' : 'light');
         }
+        
         toggleBtn.addEventListener('click', toggleTheme);
 
-        // On load, set theme from storage:
+        // On load, set theme from storage
         document.addEventListener('DOMContentLoaded', function() {
             const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'light') {
-                document.body.classList.add('light-theme');
+            if (savedTheme === 'dark') {
+                darkMode = true;
+                document.body.classList.add('dark-mode');
+                toggleBtn.textContent = 'Toggle Light Mode';
             }
         });
     </script>
